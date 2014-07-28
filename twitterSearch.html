@@ -1,0 +1,39 @@
+<!doctype html>
+<html ng-app='twitterSocketStreamApp'>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/ionic.min.css" />
+    <script src="/node_modules/angular/lib/angular.min.js"></script>
+    <script src="/node_modules/angular-animate/angular-animate.min.js"></script>
+    <script src="/node_modules/angular-socket-io/socket.min.js"></script>
+    <script src="/node_modules/socket.io/node_modules/socket.io-client/socket.io.js"></script>
+    <script src="/twitterSocketStreamController.js"></script>
+</head>
+
+<body>
+    <div ng-controller="twitterSocketStreamController">
+        <div class="title">
+            <form ng-submit="search(filter)">
+                <div class="list list-inset">
+                    <label class="item item-input">
+                        <i class="icon ion-search placeholder-icon"></i>
+                        <input ng-model="filter" type="text" placeholder="Twitter Filter !">
+                    </label>
+                </div>
+            </form>
+        </div>
+        <div class="tweet-container" ng-repeat="tweet in tweets | reverse">
+            <img class="tweet-profile-image" ng-src="{{tweet.authorImage}}">
+            <div class="tweet-content">
+                <div class="tweet-author">{{tweet.author}}
+                    <span class="tweet-date">({{tweet.date}})</span>:</div>
+                <div class="tweet-text">{{tweet.text}}</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
