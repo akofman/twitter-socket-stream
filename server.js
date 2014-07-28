@@ -51,8 +51,8 @@ io.on('connection', function(socket) {
     });
 });
 
-app.get('/twitterSearch', function(req, res) {
-    res.sendfile('twitterSearch.html');
+app.get('/twitterFilter', function(req, res) {
+    res.sendfile('twitterFilter.html');
 });
 
 http.listen(8080, function() {

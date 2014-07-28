@@ -1,5 +1,5 @@
 angular.module('twitterSocketStreamApp', ['btford.socket-io', 'ngAnimate'])
-    .controller('twitterSocketStreamController', ['$scope', '$http', 'socketFactory',
+    .controller('twitterFilterController', ['$scope', '$http', 'socketFactory',
         function($scope, $http, socketFactory) {
 
             var myIoSocket;

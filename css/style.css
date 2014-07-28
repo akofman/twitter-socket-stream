@@ -2,8 +2,20 @@
 
 body, html  {
 	background-color: #9DC2C4 !important;
-	margin:0;
-	overflow-x: scroll !important; 
+}
+
+.left-inner-addon {
+    position: relative;
+    width: 50%;
+    margin: auto;
+}
+.left-inner-addon input {
+    padding-left: 30px;    
+}
+.left-inner-addon i {
+    position: absolute;
+    padding: 10px 12px;
+    pointer-events: none;
 }
 
 .title{
@@ -12,9 +24,8 @@ body, html  {
 	width: 100%;
 	max-width: 768px;
 	margin:auto;
-	height: 90px;
-	padding-top: 1px;
-	text-align: center;
+	height: 80px;
+	padding-top: 20px;
 }
 
 .tweet-container{
@@ -74,28 +85,4 @@ body, html  {
 	display: table-cell;
 	vertical-align: middle;
 	padding: 5px;
-}
-
-.roll > span:after {
-    background: none repeat scroll 0 0 #a533fd;
-    color: white;
-    content: attr(data-title);
-    display: block;
-    left: 0;
-    padding: 0 2px;
-    position: absolute;
-    top: 0;
-    transform: translate3d(0px, 105%, 0px) rotateX(-90deg);
-    transform-origin: 50% 0 0;
-    white-space: nowrap;
-}
-
-.roll > span {
-    display: block;
-    padding: 0 2px;
-    pointer-events: none;
-    position: relative;
-    transform-origin: 50% 0 0;
-    transform-style: preserve-3d;
-    transition: all 400ms ease 0s;
 }
