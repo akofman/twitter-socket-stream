@@ -42,6 +42,20 @@ io.on('connection', function(socket) {
         }
     });
 
+    socket.on('pause', function() {
+        if (stream) {
+            stream.stop();
+            console.log(socket.id + ' - Stream paused');
+        }
+    });
+
+    socket.on('start', function() {
+        if (stream) {
+            stream.start();
+            console.log(socket.id + ' - Stream started');
+        }
+    });
+
     socket.on('disconnect', function() {
         console.log(socket.id + ' - Socket disconnected');
         if (stream) {

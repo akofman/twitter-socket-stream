@@ -26,18 +26,50 @@ angular.module('twitterSocketStreamApp', ['btford.socket-io', 'ngAnimate'])
                 if ($scope.tweets) {
                     //console.log(tweet);
                     $scope.tweets.push({
+                        id : tweet.id,
                         authorImage: tweet.user.profile_image_url,
                         author: tweet.user.screen_name,
-                        text: tweet.text,
-                        date: tweet.created_at.split(' ')[3]
+                        authorDescription: tweet.user.description,
+                        authorNbFollowers: tweet.user.followers_count,
+                        authorNbFollowing: tweet.user.friends_count,
+                        authorName: tweet.user.name,
+                        date: tweet.created_at.split(' ')[3],
+                        text: tweet.text
                     });
                 }
             });
 
             $scope.search = function(filter) {
+                $scope.searchOnce = true;
+                $scope.state = 'started';
                 if (filter) {
                     $scope.tweets = [];
                     mySocket.emit('filter', filter);
+                }
+            };
+
+            $scope.pause = function() {
+                $scope.state = 'paused';
+                mySocket.emit('pause');
+            };
+
+            $scope.start = function() {
+                $scope.state = 'started';
+                mySocket.emit('start');
+            };
+
+            var flippedCards = [];
+            $scope.isFlippedCard = function(tweetId){
+                return flippedCards.indexOf(tweetId) !== -1;
+            };
+
+            $scope.toggleTweetCard = function(tweetId){
+                console.log(tweetId);
+                if (flippedCards.indexOf(tweetId) === -1){
+                    flippedCards.push(tweetId);
+                }
+                else{
+                   flippedCards.splice(flippedCards.indexOf(tweetId),1);
                 }
             };
         }

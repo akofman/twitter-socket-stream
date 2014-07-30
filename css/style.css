@@ -9,6 +9,16 @@ body, html  {
     width: 50%;
     margin: auto;
 }
+
+.left-inner-addon.shift {
+    position: relative;
+    width: 50%;
+    transition: transform 0.5s;
+    transform: translate3d(-30px, 0, 0);
+    -webkit-transition: -webkit-transform 0.5s;
+    -webkit-transform: translate3d(-30px, 0, 0);
+}
+
 .left-inner-addon input {
     padding-left: 30px;    
 }
@@ -23,43 +33,132 @@ body, html  {
 	border-bottom: 1px solid #e1e8ed;
 	width: 100%;
 	max-width: 768px;
+	min-width: 320px;
 	margin:auto;
 	height: 80px;
 	padding-top: 20px;
+	position:relative;
+}
+
+
+.start-button{
+	background-image: url(../img/play.png);
+	background-size: contain;
+	height:34px;
+	width: 34px;
+	position:absolute;
+	top:21px;
+	right:21%;
+	opacity:1;
+	-webkit-transition:all linear 1s;
+  	transition:all linear 1s;
+}
+
+.pause-button{
+	background-image: url(../img/pause.png);
+	background-size: contain;
+	height:34px;
+	width: 34px;
+	position:absolute;
+	top:21px;
+	right:21%;
+	opacity:1;
+	-webkit-transition:all linear 1s;
+  	transition:all linear 1s;
+}
+
+.start-button.ng-hide,
+.pause-button.ng-hide {
+  opacity:0;
 }
 
 .tweet-container{
-	color: #292f33;
-	background-color: #fff;
-	border-bottom: 1px solid #e1e8ed;
-	width: 100%;
 	max-width: 768px;
+	min-width: 320px;
+	width: 100%;
 	margin:auto;
-	display:table;
+	position: relative;
+	height:200px;
+	perspective: 500px;
+	-webkit-perspective: 500px;
 }
 
+
 .tweet-container.ng-enter,.tweet-container.ng-move {
-	opacity:0;
+	transition:all linear 1s;
 	-webkit-transition:all linear 1s;
-  	transition:all linear 1s;
-
-	/*transform-style: preserve-3d;
-	transition: all 400ms ease 0s;
-    transform: translate3d(0px, 105%, 0px) rotateX(90deg);
-    transform-origin: 50% 0 0;
-    perspective: 300px;
-    perspective-origin: 50% 50%;
-
-    -webkit-transform-style: preserve-3d;
-	-webkit-transition: all 400ms ease 0s;
-    -webkit-transform-origin: 50% 0 0;
-    -webkit-transform: translate3d(0px, 105%, 0px) rotateX(-90deg);
-    -webkit-perspective: 300px;
-    -webkit-perspective-origin: 50% 50%;*/
+	opacity:0;
 }
 
 .tweet-container.ng-enter.ng-enter-active,.tweet-container.ng-move.ng-move-active {
-  opacity:1;
+  	opacity:1;
+}
+
+.tweet-card{
+  	width: 100%;
+  	height: 100%;
+	position: absolute;
+	overflow:visible !important;
+	transform-style: preserve-3d;
+  	transition: transform 1s;
+  	-webkit-transform-style: preserve-3d;
+  	-webkit-transition: -webkit-transform 1s;
+}
+
+.tweet-card.flipped{
+	transform: rotate3d(1,0,0,180deg);
+	-webkit-transform: rotate3d(1,0,0,180deg);
+}
+
+.tweet-card-front{
+	display:table;
+	position: absolute;
+	width: 100%;
+  	height: 100%;
+  	backface-visibility: hidden;
+  	-webkit-backface-visibility: hidden;
+	color: #292f33;
+	background-color: #fff;
+	border-bottom: 1px solid #e1e8ed;
+}
+
+.tweet-card-back{
+	position: absolute;
+	width: 100%;
+  	height: 100%;
+	backface-visibility: hidden;
+	-webkit-backface-visibility: hidden;
+	color: #292f33;
+	background-color: #fff;
+	border-bottom: 1px solid #e1e8ed;
+	transform: rotate3d(1,0,0,180deg);
+	-webkit-transform: rotate3d(1,0,0,180deg);
+}
+
+.tweet-author-name{
+	text-align: center;
+	font-weight: bold;
+	padding-top:10px;
+}
+
+.tweet-author-description{
+	text-align: center;
+	font-weight: normal;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+}
+
+.tweet-author-details{
+	width: 100%;
+	height: 90%;
+}
+
+.tweet-author-ff{
+	font-size: 10px;
+    font-style: italic;
+    padding-right: 15px;
+    text-align: right;
 }
 
 .tweet-author{
@@ -74,15 +173,16 @@ body, html  {
 
 .tweet-content{
 	display:table-cell;
-	padding-top: 5px;
-	padding-bottom: 5px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-right: 10px;
 	width:100%;
 	text-align: left;
-	vertical-align: top;
+	vertical-align: middle;
 }
 
 .tweet-profile-image{
 	display: table-cell;
 	vertical-align: middle;
-	padding: 5px;
+	padding: 10px;
 }

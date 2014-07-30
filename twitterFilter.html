@@ -17,21 +17,36 @@
     <div ng-controller="twitterFilterController">
         <div class="title">
             <form ng-submit="search(filter)">
-                <div class="left-inner-addon">
+                <div class="left-inner-addon" ng-class="{shift: searchOnce}">
                     <i class="glyphicon glyphicon-search"></i>
                     <input type="text" ng-model="filter" class="form-control" placeholder="Twitter Filter !" />
                 </div>
             </form>
+            <div class="pause-button" ng-show="state == 'started'" ng-click="pause()"></div>
+            <div class="start-button" ng-show="state == 'paused'" ng-click="start()"></div>
         </div>
         <div class="tweet-container" ng-repeat="tweet in tweets | reverse">
-            <img class="tweet-profile-image" ng-src="{{tweet.authorImage}}">
-            <div class="tweet-content">
-                <div class="tweet-author">{{tweet.author}}
-                    <span class="tweet-date">({{tweet.date}})</span>:</div>
-                <div class="tweet-text">{{tweet.text}}</div>
+            <div class="tweet-card" ng-class="{flipped: isFlippedCard(tweet.id)}">
+                <div class="tweet-card-front">
+                    <div class="tweet-profile-image" ng-click="toggleTweetCard(tweet.id)">
+                        <img ng-src="{{tweet.authorImage}}">
+                    </div>
+                    <div class="tweet-content">
+                        <div class="tweet-author">@{{tweet.author}}
+                            <span class="tweet-date">({{tweet.date}})</span>&nbsp;:
+                        </div>
+                        <div class="tweet-text">{{tweet.text}}</div>
+                    </div>
+                </div>
+                <div class="tweet-card-back" ng-click="toggleTweetCard(tweet.id)">
+                    <div class="tweet-author-details">
+                        <div class="tweet-author-name">{{tweet.authorName}}</div>
+                        <div class="tweet-author-description">{{tweet.authorDescription}}</div>
+                    </div>
+                    <div class="tweet-author-ff">Following/Followers : {{tweet.authorNbFollowing}}/{{tweet.authorNbFollowers}}</div>
+                </div>
             </div>
         </div>
-    </div>
 </body>
 
 </html>
