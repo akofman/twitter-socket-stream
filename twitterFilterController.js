@@ -4,6 +4,7 @@ angular.module('twitterSocketStreamApp', ['btford.socket-io', 'ngAnimate'])
 
             var myIoSocket;
             var socketId;
+            var currentFilter;
 
             myIoSocket = io({
                 'forceNew': true
@@ -26,7 +27,7 @@ angular.module('twitterSocketStreamApp', ['btford.socket-io', 'ngAnimate'])
                 if ($scope.tweets) {
                     //console.log(tweet);
                     $scope.tweets.push({
-                        id : tweet.id,
+                        id: tweet.id,
                         authorImage: tweet.user.profile_image_url,
                         author: tweet.user.screen_name,
                         authorDescription: tweet.user.description,
@@ -42,34 +43,34 @@ angular.module('twitterSocketStreamApp', ['btford.socket-io', 'ngAnimate'])
             $scope.search = function(filter) {
                 $scope.searchOnce = true;
                 $scope.state = 'started';
-                if (filter) {
+                if (filter && filter !== currentFilter) {
+                    currentFilter = filter;
                     $scope.tweets = [];
                     mySocket.emit('filter', filter);
                 }
             };
 
-            $scope.pause = function() {
-                $scope.state = 'paused';
-                mySocket.emit('pause');
-            };
-
-            $scope.start = function() {
-                $scope.state = 'started';
-                mySocket.emit('start');
+            $scope.togglePlayPause = function() {
+                if ($scope.state === 'paused') {
+                    $scope.state = 'started';
+                    mySocket.emit('start');
+                } else {
+                    $scope.state = 'paused';
+                    mySocket.emit('pause');
+                }
             };
 
             var flippedCards = [];
-            $scope.isFlippedCard = function(tweetId){
+            $scope.isFlippedCard = function(tweetId) {
                 return flippedCards.indexOf(tweetId) !== -1;
             };
 
-            $scope.toggleTweetCard = function(tweetId){
+            $scope.toggleTweetCard = function(tweetId) {
                 console.log(tweetId);
-                if (flippedCards.indexOf(tweetId) === -1){
+                if (flippedCards.indexOf(tweetId) === -1) {
                     flippedCards.push(tweetId);
-                }
-                else{
-                   flippedCards.splice(flippedCards.indexOf(tweetId),1);
+                } else {
+                    flippedCards.splice(flippedCards.indexOf(tweetId), 1);
                 }
             };
         }

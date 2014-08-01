@@ -22,8 +22,8 @@
                     <input type="text" ng-model="filter" class="form-control" placeholder="Twitter Filter !" />
                 </div>
             </form>
-            <div class="pause-button" ng-show="state == 'started'" ng-click="pause()"></div>
-            <div class="start-button" ng-show="state == 'paused'" ng-click="start()"></div>
+            <div class="pause-button" ng-show="state == 'started'" ng-click="togglePlayPause()"></div>
+            <div class="start-button" ng-show="state == 'paused'" ng-click="togglePlayPause()"></div>
         </div>
         <div class="tweet-container" ng-repeat="tweet in tweets | reverse">
             <div class="tweet-card" ng-class="{flipped: isFlippedCard(tweet.id)}">
