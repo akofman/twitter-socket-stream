@@ -10,14 +10,15 @@
     <script src="/node_modules/angular-animate/angular-animate.min.js"></script>
     <script src="/node_modules/angular-socket-io/socket.min.js"></script>
     <script src="/node_modules/socket.io/node_modules/socket.io-client/socket.io.js"></script>
-    <script src="/twitterFilterController.js"></script>
+    <script src="/twitterFilterCtrl.js"></script>
+    <script src="/twitterFilter.js"></script>
 </head>
 
 <body>
-    <div ng-controller="twitterFilterController">
+    <div ng-controller="TwitterFilterCtrl">
         <div class="title">
             <form ng-submit="search(filter)">
-                <div class="left-inner-addon" ng-class="{shift: searchOnce}">
+                <div class="left-inner-addon" ng-class="{shift: state != ''}">
                     <i class="glyphicon glyphicon-search"></i>
                     <input type="text" ng-model="filter" class="form-control" placeholder="Twitter Filter !" />
                 </div>
@@ -26,9 +27,9 @@
             <div class="start-button" ng-show="state == 'paused'" ng-click="togglePlayPause()"></div>
         </div>
         <div class="tweet-container" ng-repeat="tweet in tweets | reverse">
-            <div class="tweet-card" ng-class="{flipped: isFlippedCard(tweet.id)}">
+            <div class="tweet-card" ng-class="{flipped: isFlippedTweetCard(tweet.id)}">
                 <div class="tweet-card-front">
-                    <div class="tweet-profile-image" ng-click="toggleTweetCard(tweet.id)">
+                    <div class="tweet-profile-image" ng-click="flipTweetCard(tweet.id)">
                         <img ng-src="{{tweet.authorImage}}">
                     </div>
                     <div class="tweet-content">
@@ -38,7 +39,7 @@
                         <div class="tweet-text">{{tweet.text}}</div>
                     </div>
                 </div>
-                <div class="tweet-card-back" ng-click="toggleTweetCard(tweet.id)">
+                <div class="tweet-card-back" ng-click="flipTweetCard(tweet.id)">
                     <div class="tweet-author-details">
                         <div class="tweet-author-name">{{tweet.authorName}}</div>
                         <div class="tweet-author-description">{{tweet.authorDescription}}</div>
